@@ -1,0 +1,360 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #ffd1dc, #f9f9ff);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden;
+    color: #333;
+}
+
+.container {
+    width: 100%;
+    max-width: 900px;
+    perspective: 1000px;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(5deg);
+    transition: all 0.5s ease;
+}
+
+.card:hover {
+    transform: rotateX(0);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.header:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(to right, #ff6b6b, #ffc6c6);
+    border-radius: 3px;
+}
+
+.title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.5rem;
+    color: #ff6b6b;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    animation: fadeInDown 1.5s;
+}
+
+.subtitle {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #ff9e9e;
+    animation: fadeInUp 1.5s 0.5s forwards;
+    opacity: 0;
+}
+
+.date {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #ffd1dc;
+    border-radius: 20px;
+    font-weight: 500;
+    color: #ff6b6b;
+    font-size: 1rem;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 1.5s 0.8s forwards;
+    opacity: 0;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+@media (min-width: 768px) {
+    .content {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+}
+
+.heart-container {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.heart {
+    width: 100px;
+    height: 100px;
+    background-color: #ff6b6b;
+    position: relative;
+    transform: rotate(45deg);
+    animation: heartbeat 1.5s infinite;
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+}
+
+.heart:before, .heart:after {
+    content: "";
+    width: 100px;
+    height: 100px;
+    background-color: #ff6b6b;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.heart:before {
+    top: -50px;
+    left: 0;
+}
+
+.heart:after {
+    top: 0;
+    left: -50px;
+}
+
+.message {
+    flex: 1;
+    background-color: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    position: relative;
+    animation: fadeIn 2s 1s forwards;
+    opacity: 0;
+    border-left: 5px solid #ffd1dc;
+}
+
+.message:before {
+    content: """;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 60px;
+    font-family: Georgia, serif;
+    color: #ffd1dc;
+    opacity: 0.3;
+    line-height: 1;
+}
+
+.message p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    position: relative;
+    z-index: 2;
+}
+
+.message p:last-child {
+    margin-bottom: 0;
+}
+
+.signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+    color: #ff6b6b;
+    text-align: right;
+    margin-top: 20px;
+}
+
+.gallery {
+    margin-bottom: 40px;
+    animation: fadeIn 2s 1.5s forwards;
+    opacity: 0;
+}
+
+.gallery h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    color: #ff9e9e;
+}
+
+.photos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.photo {
+    height: 180px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.photo:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.photo-placeholder {
+    background: linear-gradient(45deg, #ffd1dc, #ff9e9e);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.photo-placeholder i {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.photo-placeholder span {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.footer {
+    text-align: center;
+    position: relative;
+    padding-top: 40px;
+    animation: fadeIn 2s 2s forwards;
+    opacity: 0;
+}
+
+.flowers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.flower {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 0 10px;
+    opacity: 0.8;
+    animation: float 3s ease-in-out infinite;
+}
+
+#flower1 {
+    background-image: url('https://cdn-icons-png.flaticon.com/512/1164/1164619.png');
+    animation-delay: 0s;
+}
+
+#flower2 {
+    background-image: url('https://cdn-icons-png.flaticon.com/512/2329/2329865.png');
+    animation-delay: 0.5s;
+}
+
+#flower3 {
+    background-image: url('https://cdn-icons-png.flaticon.com/512/1164/1164649.png');
+    animation-delay: 1s;
+}
+
+.footer-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+    color: #ff6b6b;
+}
+
+/* Animations */
+@keyframes heartbeat {
+    0% { transform: rotate(45deg) scale(1); }
+    14% { transform: rotate(45deg) scale(1.1); }
+    28% { transform: rotate(45deg) scale(1); }
+    42% { transform: rotate(45deg) scale(1.1); }
+    70% { transform: rotate(45deg) scale(1); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Falling hearts animation */
+.falling-hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.heart-drop {
+    position: absolute;
+    top: -10%;
+    color: rgba(255, 107, 107, 0.5);
+    animation: falling linear infinite;
+}
+
+@keyframes falling {
+    from {
+        transform: translateY(0) rotate(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
